@@ -9,7 +9,7 @@ private:
 public:
 	Array(int);
 	void init();
-	void insertionSort();
+	void selectionSort();
 	void display();
 	~Array();
 };
@@ -30,28 +30,28 @@ void Array::init()
 	}
 }
 
-void Array::insertionSort()
+void Array::selectionSort()
 {
 	/**
 	 * let n = number of elements
 	 * Time Complexity :
-	 * 					min= O(n)
 	 * 					max=O(n^2)
-	 * this algorithm is adaptive in nature
-	 * This is stable algorithm
+	 * not a Adaptive 
+	 * not a Stable
 	 * number of Swap=O(1)
 	 * number of Comparisons = n(n-1)/2 = O(n^2)
 	 * */
-	for (int i = 0; i < size; i++)
+	int i, j, k;
+	for (i = 0; i < size - 1; i++)
 	{
-		int j=i-1;
-		int x=array[i];
-		while (j>-1 && array[j]>x)
+		for (j = k = i; j < size; j++)
 		{
-			array[j+1]=array[j];
-			j--;
+			if (array[j] < array[k])
+			{
+				k = j;
+			}
+			swap(array[i], array[k]);
 		}
-		array[j+1]=x;
 	}
 }
 
@@ -67,13 +67,4 @@ void Array::display()
 Array::~Array()
 {
 	delete[] array;
-}
-
-int main(int argc, char const *argv[])
-{
-	Array a(5);
-	a.init();
-	a.insertionSort();
-	a.display();
-	return 0;
 }
